@@ -1,4 +1,4 @@
-# Adfit Android SDK For Advertisier 연동 가이드
+# Adfit Android SDK For Advertiser 연동 가이드
 - 본 SDK 를 통해 액션형과 실행형 광고를 진행할 수 있다.
 - 안드로이드 버전 요구사항 : 2.2(API Level 8) 이상
 
