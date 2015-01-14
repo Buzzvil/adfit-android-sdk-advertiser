@@ -26,7 +26,8 @@
 ## 3. 함수 추가
 - BuzzAd.init(Context context, String appId) :  앱 실행시 무조건 호출합니다.
 - BuzzAd.actionCompleted(Context context) : 실행형은 앱 실행시, 액션형은 액션 완료시에 호출합니다.
-- 주의 : 반드시 BuzzAd.actionCompleted 호출하기전에 BuzzAd.init를 호출해야 합니다.
+- 주의1 : 반드시 BuzzAd.actionCompleted 호출하기전에 BuzzAd.init를 호출해야 합니다.
+- 주의2 : BuzzAd.actionCompleted 호출시에 로그캣(태그:buzzad-sdk)에서 "api call success" 를 확인해야합니다.
 
 ### 실행형
 - 앱 실행후 처음 호출되는 액티비티 생성 시점에 아래와 같이 두 개의 함수를 추가합니다.
@@ -70,6 +71,5 @@ void onAction() {
 	BuzzAd.actionCompleted(this);
 }
 ```
-
 ## 4. 테스트 완료 후 광고 집행
 - 위 과정을 통해 연동한 apk 파일을 담당자에게 전해주면 테스트 후에 광고가 진행됩니다.
