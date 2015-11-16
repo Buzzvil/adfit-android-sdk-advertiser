@@ -1,36 +1,32 @@
 # BuzzAd Android SDK For Advertiser 연동 가이드
-- 본 SDK 를 통해 액션형과 실행형 광고를 진행할 수 있다.
-- 안드로이드 버전 요구사항 : 2.2(API Level 8) 이상
+- 버즈애드를 통해 광고(실행형, 액션형)를 진행하기 위한 버즈애드 광고주 트래킹 라이브러리
+- 안드로이드 버전 지원 : Android 2.3(API Level 9) 이상
+- 라이브러리 연동을 위해서는 `app_id` 필요(담당자로부터 발급)
+- **구글 플레이 서비스 라이브러리** 설정 필요. [구글 플레이 서비스 라이브러리 설정방법](https://developers.google.com/android/guides/setup)을 참고하여 직접 추가하면 된다.
 
-## 1. 프로젝트에 SDK 추가
-- [SDK 다운로드](https://github.com/Buzzvil/buzzad-android-sdk-advertiser/archive/master.zip) 후 압축을 해제합니다.
-- buzzad-android-sdk-advertiser.jar 파일을 프로젝트내(예를 들면 libs 폴더 안)에 추가합니다.
+    > 안드로이드 스튜디오와 이클립스 설정이 다릅니다. 안드로이드 스튜디오인 경우는 **build.gradle > dependencies**에 `compile 'com.google.android.gms:play-services-ads:7.5.0'`만 추가하면 됩니다.
 
-## 2. AndroidManifest.xml 파일 수정
-- AndroidManifest.xml 파일 내에 아래와 같이 권한을 추가합니다.
-- 해당 권한이 이미 있는경우 다음 단계로 넘어갑니다.
+## 1. 설정
+- [SDK 다운로드](https://github.com/Buzzvil/buzzad-android-sdk-advertiser/archive/master.zip) 후 압축 해제
+- 압축 해제한 폴더 내의 buzzad-android-sdk-advertiser.jar 파일을 프로젝트내(예를 들면 libs 폴더 안)에 추가합니다.
+- Android Manifest : 아래와 같이 권한 추가(이미 있는 경우 다음 단계로 이동)
 
-```
+```Xml
 <manifest>
-  <application>
     ...
-    
-  </application>
-  ...
-  
-  <uses-permission android:name="android.permission.INTERNET" />
-  
+    <!-- Permission for BuzzAd-->
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
 ```
 
-## 3. 함수 추가
-- BuzzAd.init(Context context, String appId) :  앱 실행시 무조건 호출합니다.
-- BuzzAd.actionCompleted(Context context) : 실행형은 앱 실행시, 액션형은 액션 완료시에 호출합니다.
-- 주의1 : 반드시 BuzzAd.actionCompleted 호출하기전에 BuzzAd.init를 호출해야 합니다.
-- 주의2 : BuzzAd.actionCompleted 호출시에 로그캣(태그:buzzad-sdk)에서 "api call success" 를 확인해야합니다.
+## 2. 트래킹 코드 추가
+- `BATracker.init(Context context, String appId)` :  앱 실행시 무조건 호출합니다.
+- `BATracker.actionCompleted(Context context)` : 실행형은 앱 실행시, 액션형은 액션 완료시에 호출합니다.
+- **주의1** : 반드시 `BATracker.actionCompleted` 호출하기전에 `BuzzAd.init`를 호출해야 합니다.
+- **주의2** : `BATracker.actionCompleted` 호출시에 Logcat(태그:buzzad-analytics)에서 `api call success` 를 확인해야합니다.
 
 ### 실행형
-- 앱 실행후 처음 호출되는 액티비티 생성 시점에 아래와 같이 두 개의 함수를 추가합니다.
+앱 실행후 처음 호출되는 액티비티 생성 시점에 아래와 같이 두 개의 함수를 추가합니다.
 
 ```
 @Override
@@ -40,8 +36,8 @@ protected void onCreate(Bundle savedInstanceState) {
 	...
 	
 	// app_id : 담당자에게 발급받은 키값
-	BuzzAd.init(this, "app_id");
-	BuzzAd.actionCompleted(this);
+	BATracker.init(this, "app_id");
+	BATracker.actionCompleted(this);
 }
 ```
 
@@ -49,7 +45,7 @@ protected void onCreate(Bundle savedInstanceState) {
 - 앱 실행 시 처음 호출되는 액티비티 생성시점에  BuzzAd.init 를 호출하고,
 - 액션완료 시점에 BuzzAd.actionCompleted 를 호출합니다.
 
-#### 앱 실행시
+##### 앱 실행시
 ```
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +54,20 @@ protected void onCreate(Bundle savedInstanceState) {
 	...
 	
 	// app_id : 담당자에게 발급받은 키값
-	BuzzAd.init(this, "app_id");
+	BATracker.init(this, "app_id");
 }
 ```
-#### 액션 완료시
+
+##### 액션 완료시
 ```
 void onAction() {
 	
 	...
 	
 	// 액션 완료시 호출!
-	BuzzAd.actionCompleted(this);
+	BATracker.actionCompleted(this);
 }
 ```
+
 ## 4. 테스트 완료 후 광고 집행
-- 위 과정을 통해 연동한 apk 파일을 담당자에게 전해주면 테스트 후에 광고가 진행됩니다.
+위 과정을 통해 연동한 apk 파일을 담당자에게 전해주면 테스트 후에 광고가 진행됩니다.
