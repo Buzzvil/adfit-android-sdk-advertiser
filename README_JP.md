@@ -32,7 +32,7 @@
 ### 起動型
 - アプリ起動後、最初に呼び出されるアクティビティ作成時点に下記の関数を追加してください。
 
-```
+```Java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ protected void onCreate(Bundle savedInstanceState) {
 - アクション完了時点で　BATracker.actionCompleted を呼び出します。
 
 #### アプリ起動時
-```
+```Java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -62,7 +62,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 #### アクション完了時
-```
+```Java
 void onAction() {
 	
 	...

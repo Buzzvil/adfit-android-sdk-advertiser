@@ -29,7 +29,7 @@
 ### 실행형
 앱 실행후 처음 호출되는 액티비티 생성 시점에 아래와 같이 두 개의 함수를 추가합니다.
 
-```
+```Java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ protected void onCreate(Bundle savedInstanceState) {
 - 액션완료 시점에 `BATracker.actionCompleted` 를 호출합니다.
 
 ##### 앱 실행시
-```
+```Java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -60,7 +60,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 
 ##### 액션 완료시
-```
+```Java
 void onAction() {
 	
 	...
