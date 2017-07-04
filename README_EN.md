@@ -17,8 +17,15 @@
 ```
 
 - Set up Google play service library for ads - [How to add google play service library] (https://developers.google.com/android/guides/setup)
-    
-    > If you are using Android Studio, you can just add `compile 'com.google.android.gms:play-services-ads:7.5.0'` command in the **build.gradle > dependencies**
+
+```Gradle
+dependencies {
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+}
+
+```
+
+> Please change the version 8.4.0 to whatever your app is currently using in the other google play service libraries. If the versions are not matched, com.android.dex.DexException Error can occur at compile time.
 
 ## 2. Add tracking functions
 - `BATracker.init(Context context, String appId)` : Call this function whenever users open your app

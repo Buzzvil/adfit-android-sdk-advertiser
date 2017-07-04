@@ -15,9 +15,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
 ```
+
 - **구글 플레이 서비스 라이브러리** 를 설정합니다. [구글 플레이 서비스 라이브러리 설정방법](https://developers.google.com/android/guides/setup) 을 참고하세요.
 
-    > 안드로이드 스튜디오와 이클립스 설정이 다릅니다. 안드로이드 스튜디오인 경우는 **build.gradle > dependencies**에 `compile 'com.google.android.gms:play-services-ads:7.5.0'`만 추가하면 됩니다.
+```Gradle
+dependencies {
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+}
+
+```
+
+> com.google.android.gms:play-services-ads:8.4.0 에서 사용하는 버전 8.4.0은 앱에서 사용하는 구글 플레이 서비스 버전과 동일하도록 수정바랍니다. 그렇지 않을 경우 컴파일시에 com.android.dex.DexException 등의 에러를 만날 수 있습니다.
 
 ## 2. 트래킹 코드 추가
 - 실행형 광고와 액션형 광고는 SDK에서 제공하는 트래킹 코드를 호출해야 하는 시점이 다릅니다.
